@@ -1,0 +1,28 @@
+name: Outdated lesson
+description: A lesson or a task no longer matches how Claude Code behaves.
+title: "Outdated: "
+labels: ["outdated-lesson"]
+body:
+  - type: input
+    id: lesson
+    attributes:
+      label: Lesson
+      description: The lesson URL, for example https://zero2vibecode.com/learn/claude-code-pro/1-3-sandbox
+      placeholder: https://zero2vibecode.com/learn/claude-code-pro/...
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is out of date
+      description: What the lesson says, and what you see instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Claude Code version
+      description: The output of `claude --version`.
+      placeholder: 2.1.300 (Claude Code)
+    validations:
+      required: true

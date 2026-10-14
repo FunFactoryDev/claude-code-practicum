@@ -1,0 +1,14 @@
+{
+  "name": "claude-code-practicum",
+  "version": "1.0.0",
+  "description": "Claude Code practicum: 14 tasks on a real project with automatic checking",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "check": "node check/run.mjs",
+    "links": "node src/cli.js notes/links.md"
+  }
+}

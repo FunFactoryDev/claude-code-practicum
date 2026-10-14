@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code practicum — 14 tasks with automatic checking</title>
+<meta name="description" content="A free Claude Code practicum: 14 tasks on a real project — CLAUDE.md, plan mode, permission rules, hooks, skills, subagents, MCP, unattended runs, GitHub Actions and /goal. Checked with one command: npm run check.">
+<link rel="canonical" href="https://funfactorydev.github.io/claude-code-practicum/">
+<meta property="og:title" content="Claude Code practicum">
+<meta property="og:description" content="14 tasks on a real project with automatic checking. The hands-on part of the course on zero2vibecode.com.">
+<meta property="og:url" content="https://funfactorydev.github.io/claude-code-practicum/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://funfactorydev.github.io/claude-code-practicum/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0b0d;--surface:#121418;--border:#23262d;--fg:#e8eaed;--muted:#9aa1ac;--accent:#34d399;--term:#0d1117}
+@media (prefers-color-scheme: light){:root{--bg:#fafaf9;--surface:#ffffff;--border:#e4e4e7;--fg:#18181b;--muted:#5b616b;--accent:#059669;--term:#0d1117}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:880px;margin:0 auto;padding:56px 16px 40px}
+.kicker{font:600 12px/1 "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(32px,6vw,52px);line-height:1.08;letter-spacing:-.02em;margin:14px 0 16px}
+h2{font-size:22px;margin:56px 0 16px}
+.lead{font-size:18px;color:var(--muted);max-width:640px;margin:0}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--fg);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#06281c}
+.btn:hover{filter:brightness(1.08)}
+.term{margin-top:40px;background:var(--term);border:1px solid #23262d;border-radius:14px;overflow:hidden;color:#d6deeb;font:13.5px/1.7 "JetBrains Mono",monospace}
+.term .bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid #23262d}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#3a3f48}
+.term pre{margin:0;padding:16px 18px;overflow-x:auto}
+.ok{color:#34d399}.no{color:#f87171}.dim{color:#7d8590}
+.cursor{display:inline-block;width:8px;height:1.1em;vertical-align:-2px;background:#34d399;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.cursor{animation:none}}
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));padding:0;margin:0;list-style:none;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;counter-increment:s}
+.steps li::before{content:counter(s);display:block;font:600 13px "JetBrains Mono",monospace;color:var(--accent);margin-bottom:6px}
+.steps b{display:block;margin-bottom:4px}
+.steps span{color:var(--muted);font-size:15px}
+.tasks{list-style:none;padding:0;margin:0;display:grid;gap:2px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.tasks li{display:flex;gap:12px;align-items:baseline;padding:10px 4px;border-bottom:1px solid var(--border)}
+.tasks .n{font:600 13px "JetBrains Mono",monospace;color:var(--accent);min-width:22px}
+.tasks a{color:var(--fg);text-decoration:none}
+.tasks a:hover{color:var(--accent)}
+.note{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:14px 18px;color:var(--muted);font-size:15px}
+.note b{color:var(--fg)}
+code{font:14px "JetBrains Mono",monospace;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1px 6px}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="kicker">Free practicum · hands-on</p>
+  <h1>Claude Code practicum</h1>
+  <p class="lead">14 tasks on a real little project. You work in your own terminal with the real Claude Code, and one command shows what you have done so far.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/FunFactoryDev/claude-code-practicum">Open on GitHub</a>
+    <a class="btn" href="https://zero2vibecode.com/learn/claude-code-pro?utm_source=github&amp;utm_medium=practicum">The course on zero2vibecode.com</a>
+  </div>
+
+  <div class="term" role="img" aria-label="Sample npm run check output: 6 of 14 tasks passed">
+    <div class="bar"><i></i><i></i><i></i></div>
+<pre><span class="dim">$</span> npm run check
+
+<span class="ok">✓</span>  1. Project memory: CLAUDE.md
+<span class="ok">✓</span>  2. Fix the failing test — plan first
+<span class="ok">✓</span>  3. Test first, then the fix
+<span class="ok">✓</span>  4. Allow and deny rules
+<span class="ok">✓</span>  5. A sandbox for commands
+<span class="ok">✓</span>  6. A guard hook for .env
+<span class="no">✗</span>  7. Your own skill
+      <span class="dim">there is no .claude/skills folder</span>
+
+Passed: 6 of 14 <span class="cursor"></span></pre>
+  </div>
+
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Copy the project</b><span>The "Use this template" button on GitHub, or <code>git clone</code>. No dependencies to install.</span></li>
+    <li><b>Do the tasks with Claude</b><span>Each one is about one technique: plan mode, rules, hooks, skills, MCP, unattended runs.</span></li>
+    <li><b>Check with one command</b><span><code>npm run check</code> tells you what is done, what is not and why, and links to the lesson.</span></li>
+  </ol>
+
+  <h2>14 tasks</h2>
+  <ol class="tasks">
+<li><span class="n">01</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/01-claude-md.md">Project memory: CLAUDE.md</a></li>
+<li><span class="n">02</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/02-plan-fix.md">Fix the failing test — plan first</a></li>
+<li><span class="n">03</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/03-test-first.md">Test first, then the fix</a></li>
+<li><span class="n">04</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/04-permissions.md">Allow and deny rules</a></li>
+<li><span class="n">05</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/05-sandbox.md">A sandbox for commands</a></li>
+<li><span class="n">06</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/06-hook.md">A guard hook for .env</a></li>
+<li><span class="n">07</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/07-skill.md">Your own skill</a></li>
+<li><span class="n">08</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/08-subagent.md">A reviewer subagent</a></li>
+<li><span class="n">09</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/09-mcp.md">An MCP server for the project</a></li>
+<li><span class="n">10</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/10-statusline.md">The status line</a></li>
+<li><span class="n">11</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/11-bounded-run.md">An unattended run with limits</a></li>
+<li><span class="n">12</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/12-github-actions.md">Claude in GitHub Actions</a></li>
+<li><span class="n">13</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/13-final-goal.md">Finale: /goal and dedupeLinks</a></li>
+<li><span class="n">14</span><a href="https://github.com/FunFactoryDev/claude-code-practicum/blob/main/practice/14-full-cycle.md">The full cycle: from request to commit</a></li>
+  </ol>
+
+  <h2>What you need</h2>
+  <div class="note">
+    <b>Node.js 20+</b> and <b>Claude Code</b> with a Claude subscription or an API key — the only paid part. No access? Take <a href="https://zero2vibecode.com/learn/claude-code-pro?utm_source=github&amp;utm_medium=practicum">the course in the browser</a>: the simulator practices the same topics with nothing to install and nothing to pay.
+  </div>
+
+  <h2>Safe for a beginner</h2>
+  <div class="note">
+    The project has no dependencies, hooks, MCP servers or Claude settings — you create all of that yourself. Only what you can see in <code>package.json</code> runs. The check reads files and changes nothing.
+  </div>
+
+  <footer>
+    The practicum for the free course "Claude Code: Pro Level" on <a href="https://zero2vibecode.com/?utm_source=github&amp;utm_medium=practicum">zero2vibecode.com</a> — learn to build with AI coding tools, right in the browser. MIT license.
+  </footer>
+</main>
+</body>
+</html>
